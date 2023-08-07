@@ -1,13 +1,13 @@
 import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
-
 import '../globals.css';
+
 import Header from '@/components/Header';
 import LeftSidebar from '@/components/LeftSidebar';
 import RightSidebar from '@/components/RightSidebar';
 import Footer from '@/components/Footer';
 
-const metadata = {
+export const metadata = {
 	title: 'Threads Application',
 	description: 'Next.js Threads Application',
 };
