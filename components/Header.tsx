@@ -6,7 +6,7 @@ import React from 'react';
 function Header() {
 	return (
 		<header className='topbar'>
-			<nav className='flex justify-between items-center'>
+			<nav className='flex justify-between items-center w-full'>
 				<Link href='/' className='flex items-center gap-4'>
 					<Image src='/assets/logo.svg' alt='logo' width={28} height={28} />
 					<p className='text-heading3-bold text-light-1 max-xs:hidden'>
@@ -28,11 +28,13 @@ function Header() {
 							</SignOutButton>
 						</SignedIn>
 					</div>
-					<OrganizationSwitcher  appearance={{
-						elements: {
-							organizationSwitcherTrigger: "py-4 px-4"
-						}
-					}}/>
+					<OrganizationSwitcher
+						appearance={{
+							elements: {
+								organizationSwitcherTrigger: 'py-4 px-4',
+							},
+						}}
+					/>
 				</div>
 			</nav>
 		</header>
