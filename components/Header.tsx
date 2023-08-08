@@ -1,7 +1,8 @@
-import { OrganizationSwitcher, SignOutButton, SignedIn } from '@clerk/nextjs';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { OrganizationSwitcher, SignOutButton, SignedIn } from '@clerk/nextjs';
+import { dark } from '@clerk/themes';
 
 function Header() {
 	return (
@@ -27,6 +28,7 @@ function Header() {
 				</div>
 				<OrganizationSwitcher
 					appearance={{
+						baseTheme: dark,
 						elements: {
 							organizationSwitcherTrigger: 'py-4 px-4',
 						},
