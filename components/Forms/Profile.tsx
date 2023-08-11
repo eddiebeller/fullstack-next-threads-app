@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { useUploadThing } from '@/lib/uploadthing';
+import { isBase64Image } from '@/lib/utils';
 
 interface ProfileProps {
 	user: {
@@ -31,6 +32,8 @@ interface ProfileProps {
 
 function Profile({ user, buttonTitle }: ProfileProps) {
 	const [files, setFiles] = useState<File[]>([]);
+	const { startUpload } = useUploadThing('media');
+
 	const form = useForm({
 		resolver: zodResolver(UserValidation),
 		defaultValues: {
@@ -63,8 +66,19 @@ function Profile({ user, buttonTitle }: ProfileProps) {
 		}
 	}
 
-	function onSubmit(values: z.infer<typeof UserValidation>) {
-		console.log(values);
+	async function onSubmit(values: z.infer<typeof UserValidation>) {
+		const profileImage = values.profile_photo;
+
+		const hasProfileImage = isBase64Image(profileImage);
+
+		if (hasProfileImage) {
+			const profileImageResponse = await startUpload(files);
+			if (profileImageResponse && profileImageResponse[0].fileUrl) {
+				values.profile_photo = profileImageResponse[0].fileUrl;
+			}
+		}
+
+		//TODO: Update the user profile after submit(call the API function on backend)
 	}
 
 	return (
