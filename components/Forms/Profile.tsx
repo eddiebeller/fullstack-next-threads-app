@@ -15,6 +15,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
+import { useUploadThing } from '@/lib/uploadthing';
 
 interface ProfileProps {
 	user: {
