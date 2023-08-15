@@ -17,6 +17,8 @@ import { Button } from '../ui/button';
 import { Textarea } from '../ui/textarea';
 import { useUploadThing } from '@/lib/uploadthing';
 import { isBase64Image } from '@/lib/utils';
+import { updateUser } from '@/lib/actions/user.actions';
+import { usePathname, useRouter } from 'next/navigation';
 
 interface ProfileProps {
 	user: {
@@ -33,6 +35,8 @@ interface ProfileProps {
 function Profile({ user, buttonTitle }: ProfileProps) {
 	const [files, setFiles] = useState<File[]>([]);
 	const { startUpload } = useUploadThing('media');
+	const router = useRouter();
+	const pathname = usePathname();
 
 	const form = useForm({
 		resolver: zodResolver(UserValidation),
@@ -79,6 +83,20 @@ function Profile({ user, buttonTitle }: ProfileProps) {
 		}
 
 		//TODO: Update the user profile after submit(call the API function on backend)
+		await updateUser({
+			userId: user.id,
+			username: values.username,
+			name: values.name,
+			bio: values.bio,
+			image: values.profile_photo,
+			path: pathname,
+		});
+
+		if (pathname === '/profile/edit') {
+			router.back();
+		} else {
+			router.push('/');
+		}
 	}
 
 	return (
@@ -135,9 +153,9 @@ function Profile({ user, buttonTitle }: ProfileProps) {
 							<FormControl className='account-form_input no-focus'>
 								<Input
 									type='text'
-									value={field.value}
 									placeholder='Name'
 									className='account-form_image-input'
+									{...field}
 								/>
 							</FormControl>
 						</FormItem>
@@ -154,9 +172,9 @@ function Profile({ user, buttonTitle }: ProfileProps) {
 							<FormControl className='account-form_input no-focus'>
 								<Input
 									type='text'
-									value={field.value}
 									placeholder='Username'
 									className='account-form_image-input'
+									{...field}
 								/>
 							</FormControl>
 						</FormItem>
@@ -173,9 +191,9 @@ function Profile({ user, buttonTitle }: ProfileProps) {
 							<FormControl className='account-form_input no-focus'>
 								<Textarea
 									rows={10}
-									value={field.value}
 									placeholder='Bio'
 									className='account-form_image-input'
+									{...field}
 								/>
 							</FormControl>
 						</FormItem>
