@@ -43,3 +43,12 @@ export async function updateUser({
 		throw new Error(`Failed to create/update user: ${error.message}`);
 	}
 }
+export async function fetchUser(id: string) {
+	try {
+		connectToDB();
+
+		return await User.findOne({ id: id });
+	} catch (error) {
+		console.error(error);
+	}
+}

@@ -1,9 +1,19 @@
-import React from 'react'
+import React from 'react';
+import { currentUser } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
+import { fetchUser } from '@/lib/actions/user.actions';
+import console from 'console';
 
-function CreateThread() {
-  return (
-    <h1 className='text-light-2 text-heading1-bold'>CreateThread</h1>
-  )
+async function Page() {
+	const user = await currentUser();
+
+	if (!user) return null;
+
+	const userInfo = await fetchUser(user.id);
+
+	if (!userInfo.onboarded) redirect('/');
+
+	return <h1 className='head-text'>Create Thread</h1>;
 }
 
-export default CreateThread
+export default Page;
