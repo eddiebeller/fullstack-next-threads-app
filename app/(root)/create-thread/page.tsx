@@ -2,7 +2,7 @@ import React from 'react';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import { fetchUser } from '@/lib/actions/user.actions';
-import console from 'console';
+import PostThread from '@/components/Forms/PostThread';
 
 async function Page() {
 	const user = await currentUser();
@@ -13,7 +13,12 @@ async function Page() {
 
 	if (!userInfo.onboarded) redirect('/');
 
-	return <h1 className='head-text'>Create Thread</h1>;
+	return (
+		<>
+			<h1 className='head-text'>Create Thread</h1>
+			<PostThread userId={userInfo._id} />
+		</>
+	);
 }
 
 export default Page;
