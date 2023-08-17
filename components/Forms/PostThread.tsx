@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import * as z from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/form';
 import { Button } from '../ui/button';
 import { usePathname, useRouter } from 'next/navigation';
-// import { updateThread } from '@/lib/actions/user.actions';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { Textarea } from '../ui/textarea';
 import { createThread } from '@/lib/actions/thread.actions';
@@ -57,6 +56,7 @@ function PostThread({ userId }: { userId: string }) {
 							<FormControl className='no-focus border border-dark-3 bg-dark-3 text-light-1'>
 								<Textarea rows={15} {...field} />
 							</FormControl>
+              <FormMessage/>
 						</FormItem>
 					)}
 				/>
