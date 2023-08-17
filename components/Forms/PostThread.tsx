@@ -18,18 +18,6 @@ import { ThreadValidation } from '@/lib/validations/thread';
 import { Textarea } from '../ui/textarea';
 import { createThread } from '@/lib/actions/thread.actions';
 
-interface PostThreadProps {
-	user: {
-		id: string;
-		objId: string;
-		username: string;
-		name: string;
-		bio: string;
-		image: string;
-	};
-	buttonTitle: string;
-}
-
 function PostThread({ userId }: { userId: string }) {
 	const router = useRouter();
 	const pathname = usePathname();
@@ -49,7 +37,7 @@ function PostThread({ userId }: { userId: string }) {
 			communityId: null,
 			path: pathname,
 		});
-    router.push('/')
+		router.push('/');
 	};
 
 	return (
