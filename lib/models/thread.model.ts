@@ -6,7 +6,7 @@ const threadSchema = new mongoose.Schema({
 	community: { type: mongoose.Schema.Types.ObjectId, ref: 'Commnunity' },
 	createdAt: {
 		type: Date,
-		default: Date.now(),
+		default: Date.now,
 	},
 	parentId: { type: String },
 	children: [
