@@ -8,7 +8,7 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '../ui/button';
 import { usePathname, useRouter } from 'next/navigation';
-// import { createThread } from '@/lib/actions/thread.actions';
+import { addCommentToThread } from '@/lib/actions/thread.actions';
 import { CommentValidation } from '@/lib/validations/thread';
 import router from 'next/router';
 import Image from 'next/image';
@@ -31,13 +31,14 @@ function Comment({ threadId, currentUserId, currentUserImage }: CommentProps) {
 	});
 
 	const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
-		// await createThread({
-		// 	content: values.thread,
-		// 	author: userId,
-		// 	communityId: null,
-		// 	path: pathname,
-		// });
-		router.push('/');
+		await addCommentToThread(
+			threadId,
+			values.thread,
+			JSON.parse(currentUserId),
+			pathname
+		);
+
+		form.reset();
 	};
 
 	return (

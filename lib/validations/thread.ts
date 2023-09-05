@@ -9,5 +9,5 @@ export const CommentValidation = z.object({
 	thread: z
 		.string()
 		.nonempty()
-		.min(3, { message: 'Comment must me minimun 3 characters.' }),
+		.min(3, { message: 'Comment must be minimum 3 characters.' }),
 });
