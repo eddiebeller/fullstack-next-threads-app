@@ -1,3 +1,4 @@
+import Comment from '@/components/Forms/Comment';
 import ThreadCard from '@/components/ThreadCard';
 import { fetchThreadById } from '@/lib/actions/thread.actions';
 import { fetchUser } from '@/lib/actions/user.actions';
@@ -11,7 +12,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
 	if (!user) return null;
 
 	const userInfo = await fetchUser(user.id);
-	if (userInfo?.onboarded) redirect('/onboarding');
+	if (!userInfo?.onboarded) redirect('/onboarding');
 
 	const thread = await fetchThreadById(params.id);
 
@@ -28,6 +29,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
 					community={thread.community}
 					createdAt={thread.createdAt}
 					comments={thread.children}
+				/>
+			</div>
+			<div className='mt-7'>
+				<Comment
+					threadId={thread.id}
+					currentUserImage={user.imageUrl}
+					currentUserId={JSON.stringify(userInfo._id)}
 				/>
 			</div>
 		</section>
