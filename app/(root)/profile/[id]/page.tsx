@@ -1,4 +1,5 @@
 import React from 'react';
+import ProfileHeader from '@/components/ProfileHeader';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import { fetchUser } from '@/lib/actions/user.actions';
@@ -13,7 +14,14 @@ async function Page({ params }: { params: { id: string } }) {
 
 	return (
 		<section>
-			<h1 className='head-text'>Profile Page</h1>
+			<ProfileHeader
+				accountId={userInfo.id}
+				userId={user.id}
+				name={userInfo.name}
+				username={userInfo.username}
+				imageUrl={userInfo.image}
+				bio={userInfo.bio}
+			/>
 		</section>
 	);
 }
