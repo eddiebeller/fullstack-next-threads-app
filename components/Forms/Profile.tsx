@@ -20,7 +20,7 @@ import { isBase64Image } from '@/lib/utils';
 import { updateUser } from '@/lib/actions/user.actions';
 import { usePathname, useRouter } from 'next/navigation';
 
-interface ProfileProps {
+type ProfileProps = {
 	user: {
 		id: string;
 		objId: string;
@@ -30,7 +30,7 @@ interface ProfileProps {
 		image: string;
 	};
 	buttonTitle: string;
-}
+};
 
 function Profile({ user, buttonTitle }: ProfileProps) {
 	const [files, setFiles] = useState<File[]>([]);

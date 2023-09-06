@@ -13,11 +13,11 @@ import { CommentValidation } from '@/lib/validations/thread';
 import router from 'next/router';
 import Image from 'next/image';
 
-interface CommentProps {
+type CommentProps = {
 	threadId: string;
 	currentUserId: string;
 	currentUserImage: string;
-}
+};
 
 function Comment({ threadId, currentUserId, currentUserImage }: CommentProps) {
 	const router = useRouter();

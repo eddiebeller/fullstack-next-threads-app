@@ -4,14 +4,14 @@ import { revalidatePath } from 'next/cache';
 import { connectToDB } from '../mongoose';
 import User from '../models/user.model';
 
-interface UpdateUserProps {
+type UpdateUserProps = {
 	userId: string;
 	username: string;
 	name: string;
 	bio: string;
 	image: string;
 	path: string;
-}
+};
 
 export async function updateUser({
 	userId,

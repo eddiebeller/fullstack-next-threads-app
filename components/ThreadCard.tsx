@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-interface ThreadCardProps {
+type ThreadCardProps = {
 	id: string;
 	currentUserId: string;
 	parentId: string | null;
@@ -23,8 +23,8 @@ interface ThreadCardProps {
 			image: string;
 		};
 	}[];
-	isComment?: boolen;
-}
+	isComment?: boolean;
+};
 function ThreadCard({
 	id,
 	currentUserId,

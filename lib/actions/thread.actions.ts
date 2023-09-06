@@ -5,12 +5,12 @@ import Thread from '../models/thread.model';
 import User from '../models/user.model';
 import { connectToDB } from '../mongoose';
 
-interface ThreadProps {
+type ThreadProps = {
 	content: string;
 	author: string;
 	communityId: string | null;
 	path: string;
-}
+};
 export async function createThread({
 	content,
 	author,
