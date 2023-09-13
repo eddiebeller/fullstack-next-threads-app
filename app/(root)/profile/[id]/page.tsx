@@ -6,6 +6,7 @@ import { fetchUser } from '@/lib/actions/user.actions';
 import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { profileTabs } from '@/data';
 import Image from 'next/image';
+import { userInfo } from 'os';
 
 async function Page({ params }: { params: { id: string } }) {
 	const user = await currentUser();
@@ -38,6 +39,11 @@ async function Page({ params }: { params: { id: string } }) {
 									className='object-contain'
 								/>
 								<p className='max-sm:hidden'>{tab.label}</p>
+								{tab.label === 'Threads' && (
+									<p className='ml-1 rounded-sm bg-light-4 px-2 py-1 !text-tiny-medium text-light-2'>
+										{userInfo?.threads?.length}
+									</p>
+								)}
 							</TabsTrigger>
 						))}
 					</TabsList>
