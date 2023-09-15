@@ -6,7 +6,7 @@ import { fetchUser } from '@/lib/actions/user.actions';
 import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
 import { profileTabs } from '@/data';
 import Image from 'next/image';
-import { userInfo } from 'os';
+import Threadstab from '@/components/Threadstab';
 
 async function Page({ params }: { params: { id: string } }) {
 	const user = await currentUser();
@@ -47,6 +47,19 @@ async function Page({ params }: { params: { id: string } }) {
 							</TabsTrigger>
 						))}
 					</TabsList>
+					{profileTabs.map((tab) => (
+						<TabsContent
+							key={`content-${tab.label}`}
+							value={tab.value}
+							className='w-full text-light-1'
+						>
+							<Threadstab
+								currentUser={user.id}
+								accountId={userInfo.accountId}
+								accountType='User'
+							/>
+						</TabsContent>
+					))}
 				</Tabs>
 			</div>
 		</section>
