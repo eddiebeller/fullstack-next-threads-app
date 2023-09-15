@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { connectToDB } from '../mongoose';
 import User from '../models/user.model';
+import Thread from '../models/thread.model';
 
 type UpdateUserProps = {
 	userId: string;
@@ -48,6 +49,30 @@ export async function fetchUser(id: string) {
 		connectToDB();
 
 		return await User.findOne({ id: id });
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export async function fetchUserPosts(userId: string) {
+	try {
+		connectToDB();
+		// Find all posts authored by user with given userId
+		const threads = await User.findOne({ id: userId }).populate({
+			path: 'threads',
+			model: Thread,
+			populate: {
+				path: 'children',
+				model: Thread,
+				populate: {
+					path: 'author',
+					model: User,
+					select: 'name image id',
+				},
+			},
+		});
+
+		return threads;
 	} catch (error) {
 		console.error(error);
 	}

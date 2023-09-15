@@ -54,8 +54,8 @@ async function Page({ params }: { params: { id: string } }) {
 							className='w-full text-light-1'
 						>
 							<Threadstab
-								currentUser={user.id}
-								accountId={userInfo.accountId}
+								currentUserId={user?.id}
+								accountId={userInfo?.id}
 								accountType='User'
 							/>
 						</TabsContent>
