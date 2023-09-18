@@ -4,20 +4,24 @@ import { sidebarLinks } from '@/data';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuth } from '@clerk/nextjs';
 
 type NavLinksProps = {
 	classname: string;
 	mobile?: boolean;
-}
+};
 
 function NavLinks({ classname, mobile }: NavLinksProps) {
 	const pathname = usePathname();
+	const { userId } = useAuth();
 	return (
 		<>
 			{sidebarLinks.map((link) => {
 				const isLinkActive =
 					(pathname.includes(link.route) && link.route.length > 1) ||
 					pathname === link.route;
+
+				if (link.route === '/profile') link.route = `${link.route}/${userId}`;
 
 				return (
 					<Link
