@@ -20,12 +20,8 @@ async function Page() {
 					{activity?.length > 0 ? (
 						<>
 							{activity?.map((activity) => (
-								<article className='activity-card'>
-									<Link
-										href={`/thread/${activity.parentId}`}
-										key={activity.id}
-										className='flex gap-3 items-center'
-									>
+								<Link href={`/thread/${activity.parentId}`} key={activity.id}>
+									<figure className='activity-card'>
 										<Image
 											src={activity.author.image}
 											alt='user logo'
@@ -39,8 +35,8 @@ async function Page() {
 											</span>
 											replied to your thread
 										</p>
-									</Link>
-								</article>
+									</figure>
+								</Link>
 							))}
 						</>
 					) : (

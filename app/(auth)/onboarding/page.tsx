@@ -1,9 +1,16 @@
 import React from 'react';
 import Profile from '@/components/Forms/Profile';
 import { currentUser } from '@clerk/nextjs';
+import { fetchUser } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 
 async function Page() {
 	const user = await currentUser();
+	if (!user) return null;
+
+	const userInfo = await fetchUser(user.id);
+	if (userInfo?.onboarded) redirect('/');
+
 	const userInformation = {
 		id: user?.id as string,
 		objId: 'Will come from Database',
