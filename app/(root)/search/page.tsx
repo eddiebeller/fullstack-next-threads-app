@@ -2,6 +2,7 @@ import React from 'react';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
 import { fetchUser, fetchUsers } from '@/lib/actions/user.actions';
+import UserCard from '@/components/UserCard';
 
 async function Page() {
 	const user = await currentUser();
@@ -32,9 +33,14 @@ async function Page() {
 				) : (
 					<>
 						{result?.users.map((user) => (
-							<p className='text-white text-heading1-bold'>
-								{user.name} {user.username}
-							</p>
+							<UserCard
+								key={user.id}
+								id={user.id}
+								name={user.name}
+								username={user.username}
+								image={user.image}
+								personType='User'
+							/>
 						))}
 					</>
 				)}
