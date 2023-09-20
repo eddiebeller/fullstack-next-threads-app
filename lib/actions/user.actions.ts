@@ -120,3 +120,31 @@ export async function fetchUsers({
 		console.error(error);
 	}
 }
+
+export async function getActivity(userId: string) {
+	try {
+		connectToDB();
+
+		// find all threads created by the current user
+		const userThreads = await Thread.find({ author: userId });
+
+		// Collect all the child threads(replies) from the 'children' fields
+		const childThreadIds = userThreads.reduce((acc, thread) => {
+			return acc.concat(thread.children);
+		}, []);
+
+		// Get access to all of the replies excluding the ones created by the same user
+		const replies = await Thread.find({
+			_id: { $in: childThreadIds },
+			author: { $ne: userId },
+		}).populate({
+			path: 'author',
+			model: User,
+			select: 'name image _id',
+		});
+
+		return replies;
+	} catch (error) {
+		console.error(error);
+	}
+}
