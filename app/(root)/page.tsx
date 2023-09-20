@@ -1,11 +1,17 @@
 import ThreadCard from '@/components/ThreadCard';
 import { fetchThreads } from '@/lib/actions/thread.actions';
+import { fetchUser } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
 
 export default async function Home() {
 	const user = await currentUser();
-	const result = await fetchThreads(1, 30);
+	if (!user) return null;
 
+	const userInfo = await fetchUser(user.id);
+	if (!userInfo?.onboarded) redirect('/onboarding');
+
+	const result = await fetchThreads(1, 30);
 	return (
 		<>
 			<h1 className='head-text head-left'>Home</h1>
