@@ -1,10 +1,12 @@
 'use server';
-
 import { revalidatePath } from 'next/cache';
 import { connectToDB } from '../mongoose';
 import User from '../models/user.model';
 import Thread from '../models/thread.model';
 import { FilterQuery, SortOrder } from 'mongoose';
+
+// FIXME: Fix issue with the db connection
+// TODO: Before use connectToDB, check if you already connectet?
 
 type UpdateUserProps = {
 	userId: string;

@@ -82,7 +82,6 @@ function Profile({ user, buttonTitle }: ProfileProps) {
 			}
 		}
 
-		//TODO: Update the user profile after submit(call the API function on backend)
 		await updateUser({
 			userId: user.id,
 			username: values.username,

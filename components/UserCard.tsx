@@ -26,7 +26,6 @@ function UserCard({ name, username, image, id, personType }: UserCardProps) {
 				/>
 				<div className='flex-1 text-ellipsis'>
 					<h4 className='text-base-semibold text-light-1'>{name}</h4>
-					{/* TODO: make a username clickable and add the route to the profile page with specified ID */}
 					<a
 						className='text-small-medium text-gray-1 hover:underline decoration-slate-400'
 						href={`/profile/${id}`}
