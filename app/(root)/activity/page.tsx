@@ -8,11 +8,9 @@ async function Page() {
 	const user = await currentUser();
 	if (!user) return null;
 
-	// Fech current user
 	const userInfo = await fetchUser(user.id);
 	if (!userInfo?.onboarded) redirect('/onboarding');
 
-	// TODO: create a new action fetchActivities() or getNotifacations()
 	const activity = await getActivity(userInfo._id);
 
 	return (
