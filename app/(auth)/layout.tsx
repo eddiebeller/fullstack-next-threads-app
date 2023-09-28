@@ -15,7 +15,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<ClerkProvider publishableKey={process.env.CLERK_SECRET_KEY}>
+		<ClerkProvider>
 			<html lang='en'>
 				<body className={`${inter.className} bg-dark-3`}>
 					<div className='w-full min-h-screen flex justify-center items-center'>
