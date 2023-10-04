@@ -1,3 +1,4 @@
+import { formatDateString } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -108,25 +109,31 @@ function ThreadCard({
 				</div>
 				{/* TODO: Delete thread */}
 				{/* TODO: Show comment logos */}
-
-				{!isComment && community && (
-					<Link
-						href={`community/${community.id}`}
-						className='mt-5 flex items-center'
-					>
-						<p className='text-subtle-medium text-gray-1'>
-							{community.name} Community
-						</p>
-						<Image
-							src={community.image}
-							alt='community image'
-							width={15}
-							height={15}
-							className='rounded-full ml-1'
-						/>
-					</Link>
-				)}
 			</div>
+			{!isComment && community && (
+				<Link
+					href={`community/${community.id}`}
+					className='mt-5 flex items-center'
+				>
+					<p className='text-subtle-medium text-gray-1'>
+						{formatDateString(createdAt)} - {community.name} Community
+					</p>
+					<Image
+						src={community.image}
+						alt='community image'
+						width={15}
+						height={15}
+						className='rounded-full ml-1'
+					/>
+				</Link>
+			)}
+			{!isComment && !community && (
+				<div className='mt-5 flex items-center'>
+					<p className='text-subtle-medium text-gray-1'>
+						{formatDateString(createdAt)}
+					</p>
+				</div>
+			)}
 		</article>
 	);
 }
