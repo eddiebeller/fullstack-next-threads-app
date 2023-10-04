@@ -16,10 +16,12 @@ import { usePathname, useRouter } from 'next/navigation';
 import { ThreadValidation } from '@/lib/validations/thread';
 import { Textarea } from '../ui/textarea';
 import { createThread } from '@/lib/actions/thread.actions';
+import { useOrganization } from '@clerk/nextjs';
 
 function PostThread({ userId }: { userId: string }) {
 	const router = useRouter();
 	const pathname = usePathname();
+	const { organization } = useOrganization();
 
 	const form = useForm({
 		resolver: zodResolver(ThreadValidation),
@@ -33,9 +35,10 @@ function PostThread({ userId }: { userId: string }) {
 		await createThread({
 			content: values.thread,
 			author: userId,
-			communityId: null,
+			communityId: organization ? organization.id : null,
 			path: pathname,
 		});
+
 		router.push('/');
 	};
 
@@ -56,7 +59,7 @@ function PostThread({ userId }: { userId: string }) {
 							<FormControl className='no-focus border border-dark-3 bg-dark-3 text-light-1'>
 								<Textarea rows={15} {...field} />
 							</FormControl>
-              <FormMessage/>
+							<FormMessage />
 						</FormItem>
 					)}
 				/>
