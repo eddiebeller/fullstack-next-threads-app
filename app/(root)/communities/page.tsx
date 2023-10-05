@@ -1,6 +1,6 @@
 import React from 'react';
+import CommunityCard from '@/components/CommunityCard';
 import { currentUser } from '@clerk/nextjs';
-import UserCard from '@/components/UserCard';
 import { fetchCommunities } from '@/lib/actions/community.actions';
 
 async function Page() {
@@ -16,7 +16,7 @@ async function Page() {
 
 	return (
 		<section>
-			<h1 className='head-text mb-10'>Search</h1>
+			<h1 className='head-text mb-10'>Communities</h1>
 
 			{/* Searchbar component here */}
 
@@ -26,13 +26,14 @@ async function Page() {
 				) : (
 					<>
 						{result?.communities.map((community) => (
-							<UserCard
+							<CommunityCard
 								key={community.id}
 								id={community.id}
 								name={community.name}
 								username={community.username}
 								image={community.image}
-								personType='Community'
+								bio={community.bio}
+								members={community.members}
 							/>
 						))}
 					</>
