@@ -2,6 +2,7 @@ import { fetchUserPosts } from '@/lib/actions/user.actions';
 import { redirect } from 'next/navigation';
 import React from 'react';
 import ThreadCard from './ThreadCard';
+import { fetchCommunityPosts } from '@/lib/actions/community.actions';
 
 type ThreadsTab = {
 	currentUserId: string;
@@ -14,7 +15,12 @@ async function Threadstab({
 	accountType,
 }: ThreadsTab) {
 	//TODO: Fetch profile threads for the specific user or organization and render it.
-	let result = await fetchUserPosts(accountId);
+	let result: any;
+	if (accountType === 'Community') {
+		result = await fetchCommunityPosts(accountId);
+	} else {
+		result = await fetchUserPosts(accountId);
+	}
 
 	if (!result) redirect('/');
 

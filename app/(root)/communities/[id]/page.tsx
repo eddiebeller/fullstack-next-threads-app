@@ -1,12 +1,11 @@
 import React from 'react';
 import ProfileHeader from '@/components/ProfileHeader';
-import { currentUser } from '@clerk/nextjs';
-import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
-import { communityTabs, profileTabs } from '@/data';
 import Image from 'next/image';
 import Threadstab from '@/components/Threadstab';
+import { currentUser } from '@clerk/nextjs';
+import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs';
+import { communityTabs } from '@/data';
 import { fetchCommunityDetails } from '@/lib/actions/community.actions';
-import { userInfo } from 'os';
 import UserCard from '@/components/UserCard';
 
 async function Page({ params }: { params: { id: string } }) {
@@ -72,7 +71,7 @@ async function Page({ params }: { params: { id: string } }) {
 						<Threadstab
 							currentUserId={user?.id}
 							accountId={CommunityDetails?.id}
-							accountType='User'
+							accountType='Community'
 						/>
 					</TabsContent>
 				</Tabs>
